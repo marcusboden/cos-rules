@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exuo pipefail
+set -euo pipefail
 
 RENDERED_PATH=${1:?Usage: scripts/publish.sh <rendered-path>}
 
@@ -33,7 +33,7 @@ for BRANCH in $(ls $RENDERED_PATH); do
     git add .
     git config user.name "${GITHUB_ACTOR}"
     git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-    git commit -m "Sync cos-configuration" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+    git commit -m "Sync cos-configuration"
     git push origin ${BRANCH}:${BRANCH} --force
 
     popd
