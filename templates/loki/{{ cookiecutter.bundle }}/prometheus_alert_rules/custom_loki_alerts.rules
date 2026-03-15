@@ -1,0 +1,19 @@
+{% raw %}
+groups:
+- name: loki_request_latency_alerts
+  rules:
+  - alert: LokiRequestLatency99thPercentile
+    annotations:
+      description: "The {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf\
+        \ \"%.2f\" $value }}s 99th percentile latency\n  VALUE = {{ $value }}\n  LABELS\
+        \ = {{ $labels }}"
+      summary: Loki request latency (instance {{ $labels.instance }})
+    expr: (histogram_quantile(0.99, sum by(le) (rate(loki_request_duration_seconds_bucket{juju_application="loki",juju_model="cos",route!~"(?i).*tail.*"}[5m]))))
+      > {% endraw %}{{ cookiecutter.loki_latency_threshold_sec }}{% raw %}
+    for: 15m
+    labels:
+      juju_application: loki
+      juju_charm: loki-k8s
+      juju_model: cos
+      severity: critical
+{% endraw %}

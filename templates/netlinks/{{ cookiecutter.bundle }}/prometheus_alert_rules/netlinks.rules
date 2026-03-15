@@ -1,0 +1,21 @@
+{% raw %}
+groups:
+  - name: "interface netlinks"
+    rules:
+{% endraw -%}
+{% for node,interfaces in cookiecutter.nodes.items() -%}
+{% if interfaces == "default" -%}
+  {% set interfaces = cookiecutter.default_interfaces -%}
+{% endif -%}
+{% for interface,speed in interfaces.items() -%}{% raw %}
+      - alert: {% endraw %}"Netlinks_{{node}}_{{interface}}"{% raw %}
+        annotations:
+          description: {% endraw %}"The speed of interface {{interface}} on node {{node}} is not its expected value of {{speed}} Gbps"{% raw %}
+          summary: "Interface speed incorrect"
+        expr: {% endraw %}"node_network_speed_bytes{agent_hostname=\"{{node}}\",device=\"{{interface}}\"} != {{speed}} * 1000^3 / 8"{% raw %}
+        for: "5m"
+        labels:
+          severity: "critical"
+  {% endraw -%}
+{% endfor -%}
+{% endfor %}

@@ -1,0 +1,46 @@
+{% raw %}
+groups:
+- name: ChronyAlerts
+  rules:
+  - alert: ChronyOffsetWarning
+    annotations:
+      description: |-
+        Chrony Offset is getting high.
+          VALUE = {{ $value }}
+          LABELS: {{ $labels }}
+      summary: Chrony offset on {{ $labels.juju_unit }} is at {{ $value }}.
+    labels:
+      severity: warning
+    expr: abs(chrony_tracking_last_offset_seconds) > {% endraw %}{{ cookiecutter.offset_warn }}{% raw %}
+  - alert: ChronyOffsetWarning
+    annotations:
+      description: |-
+        Chrony Offset is high.
+          VALUE = {{ $value }}
+          LABELS: {{ $labels }}
+      summary: Chrony offset on {{ $labels.juju_unit }} is at {{ $value }}.
+    labels:
+      severity: warning
+    expr: abs(chrony_tracking_last_offset_seconds) > {% endraw %}{{ cookiecutter.offset_crit }}{% raw %}
+
+  - alert: ChronyReachabilityWarning
+    annotations:
+      description: |-
+        Chrony Reachabiity is getting low.
+          VALUE = {{ $value }}
+          LABELS: {{ $labels }}
+      summary: Chrony Reachability on {{ $labels.juju_unit }} is at {{ $value }}.
+    labels:
+      severity: warning
+    expr: avg without(source_name, source_address) (chrony_sources_reachability_ratio) < {% endraw %}{{ cookiecutter.reach_warn }}{% raw %}
+  - alert: ChronyReachabilityCritical
+    annotations:
+      description: |-
+        Chrony Reachabiity is low.
+          VALUE = {{ $value }}
+          LABELS: {{ $labels }}
+      summary: Chrony Reachability on {{ $labels.juju_unit }} is at {{ $value }}.
+    labels:
+      severity: critical
+    expr: avg without(source_name, source_address) (chrony_sources_reachability_ratio) < {% endraw %}{{ cookiecutter.reach_crit }}{% raw %}
+{% endraw %}

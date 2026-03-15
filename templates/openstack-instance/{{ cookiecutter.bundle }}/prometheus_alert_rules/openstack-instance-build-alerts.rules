@@ -1,0 +1,31 @@
+{% if cookiecutter.tenants.tenant_ids and cookiecutter.tenants.tenant_ids != [''] and cookiecutter.tenants.tenant_ids|length > 0 %}groups:
+- name: openstack_alerts
+  rules:
+  - alert: InstanceStuckInBuild
+    expr: avg by (uuid,tenant_id) (openstack_nova_server_status{tenant_id=~"{{ cookiecutter.tenants.tenant_ids | join('|') }}", status="BUILD"}) > 0
+    for: {{ cookiecutter.instance_build_timeout }}
+    labels:
+      severity: warning
+    annotations:
+      summary: "Instance {% raw %}{{ $labels.uuid }}{% endraw %} of tenant {% raw %}{{ $labels.tenant_id }}{% endraw %} stuck in BUILD state"
+      description: |
+        The instance has been in BUILD status for more than {{ cookiecutter.instance_build_timeout }}.
+
+        This usually blocks the github runners, since they eat up quota and cannot be removed. Please investigate.
+        First, try to find and remove them with openstack commands. If that doesn't work, these may need some DB surgery.
+        
+  - alert: InstanceStuckInError
+    expr: avg by (uuid,tenant_id) (openstack_nova_server_status{tenant_id=~"{{ cookiecutter.tenants.tenant_ids | join('|') }}", status="ERROR"}) > 0
+    for: {{ cookiecutter.instance_build_timeout }}
+    labels:
+      severity: warning
+    annotations:
+      summary: "Instance {% raw %}{{ $labels.uuid }}{% endraw %} of tenant {% raw %}{{ $labels.tenant_id }}{% endraw %} stuck in ERROR state"
+      description: |
+        The instance has been in ERROR status for more than {{ cookiecutter.instance_build_timeout }}.
+
+        This usually blocks the github runners, since they eat up quota and cannot be removed. Please investigate.
+        First, try to find and remove them with openstack commands. If that doesn't work, these may need some DB surgery. Log in with https://portal.managed.canonical.com/automations/snippets?pk=68
+        
+        Usually, these need some DB surgery. 
+{% endif %}

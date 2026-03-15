@@ -1,0 +1,15 @@
+{% raw %}
+groups:
+- name: OsdLogAlerts
+  rules:
+  - alert: OsdSlowOps
+    expr: sum by(osd) (sum_over_time({filename=~"/var/log/ceph/ceph-osd..*.log"} |= `get_health_metrics` | pattern `<time> <thread> <_> <osd> <_> get_health_metrics reporting <cnt> slow ops, oldest is <operation>` | unwrap cnt [5m])) > 0
+    annotations:
+      summary: |
+        There were {{ $value }} Slow Ops {{ $labels.osd }} in the last 5 minutes. Check the Ceph cluster.
+      description: |
+        OSD slow ops are occuring. Check the Ceph cluster.
+    labels:
+      severity: critical
+      host: "{{ $labels.instance }}"
+{% endraw -%}

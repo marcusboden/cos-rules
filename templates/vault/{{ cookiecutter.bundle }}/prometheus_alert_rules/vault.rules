@@ -1,0 +1,29 @@
+{% raw %}
+groups:
+- name: VaultHealthAlerts
+  rules:
+  - alert: VaultSealed
+    expr: vault_sealed > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Vault sealed (instance {{ $labels.juju_unit }})
+      description: "Vault instance is sealed on {{ $labels.juju_unit }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: VaultServiceNotRunning
+    expr: vault_service_state > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Vault systemd service not running (instance {{ $labels.juju_unit }})
+      description: "Vault systemd service not running on {{ $labels.juju_unit }}:  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: VaultVersionMismatch
+    expr: vault_version_mismatch > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Vault version mismatch on (instance {{ $labels.juju_unit }})
+      description: "Vault snap and service version mismatch on {{ $labels.juju_unit }}:  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+{% endraw %}

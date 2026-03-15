@@ -1,0 +1,16 @@
+{%- if cookiecutter.fetchconsumer_request_latency_threshold|length > 0 -%}
+{% raw %}
+groups:
+- name: Custom Request Latency Rules
+  rules:
+    - alert: High FetchConsumer Request Latency
+      annotations:
+        description: "The broker {{ $labels.instance }} has high FetchConsumer request latency ({{ $value }}>{% endraw %}{{ cookiecutter.fetchconsumer_request_latency_threshold }}{% raw %}% ms) for more than 5 minutes."
+        summary: |
+          Broker {{ $labels.instance }} :: Critical :: FetchConsumer request latency is {{ $value }}
+      expr: max by(instance) (kafka_network_requestmetrics_totaltimems{request="FetchConsumer", quantile="0.99"}) > {% endraw %}{{ cookiecutter.fetchconsumer_request_latency_threshold }}{% raw %}
+      for: 5m
+      labels:
+        severity: critical
+{% endraw %}
+{%- endif -%}

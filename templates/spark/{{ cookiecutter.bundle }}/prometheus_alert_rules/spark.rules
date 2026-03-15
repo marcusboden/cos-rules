@@ -1,0 +1,13 @@
+{% raw -%}
+groups:
+- name: spark.alerts.cos-config
+  rules:
+  - alert: Spark History Server Down
+    expr: up{juju_application="history-server",juju_charm!=".*",juju_model="spark"} == 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: Prometheus target missing (instance {{ $labels.instance }})
+      description: "Spark History Server K8s target has disappeared. An exporter might be crashed.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+{% endraw -%}

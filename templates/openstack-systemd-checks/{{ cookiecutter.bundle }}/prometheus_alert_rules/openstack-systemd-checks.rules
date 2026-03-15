@@ -1,0 +1,17 @@
+groups:
+  - name: OpenStack Systemd Checks
+    rules:{% for service, components in cookiecutter.services.items() if service not in cookiecutter.blacklist.services %}
+    - alert: Systemd Service {{ service }}.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name={% if service == "ceph-radosgw.*" %}~{% endif %}"{{ service }}.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name={% if service == "ceph-radosgw.*" %}~{% endif %}"{{ service }}.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: {{ service }}
+      annotations:
+        summary: OpenStack Systemd service {{ service }} on {{ '{{' }} $labels.instance {{ '}}' }} is down.
+        description: |
+          The systemd service "{{ service }}.service" on {{ '{{' }} $labels.instance {{ '}}' }} is down.
+          This systemd unit could be part of any of the the following openstack components: {{ components | join(', ') }}.
+          Please check the unit and the logs.
+{% endfor -%}

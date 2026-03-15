@@ -1,0 +1,6 @@
+{
+  "bundle": "default-bundle",
+  "jvm_usage_percent_threshold": "",
+  "fetchconsumer_request_latency_threshold": "2000",
+  "broker_counts": {}
+}

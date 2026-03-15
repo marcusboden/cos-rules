@@ -1,0 +1,23 @@
+dest: generated
+
+vars:
+  global_var: "global_data"
+
+bundles:
+  - name: openstack-caracal-nonrpe
+    vars:
+      bundle_var: "bundle_data"
+    components:
+      - name: openstack-instance
+        vars:
+          critical_threshold: 25.0
+          warning_threshold: 10.0
+      - name: openstack-systemd-checks
+      - name: landscape-systemd-checks
+      - name: rabbitmq
+      - name: etcd
+      - name: ceph
+      - name: octavia
+  - name: spark
+    components:
+      - name: spark

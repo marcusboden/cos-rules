@@ -1,0 +1,5 @@
+{
+  "bundle": "default-bundle",
+  "no_juju_topology_message": "This notification originated from an alert rule in cos-configuration. As such, it does not have the Juju topology labels. Look for an identically named alert but with severity=warning to get the model, application, etc.",
+  "job_name": "kube-state-metrics"
+}

@@ -1,0 +1,18 @@
+{%- if cookiecutter.broker_counts|length > 0 -%}
+{% raw %}
+groups:
+- name: Custom Broker Count Rules
+  rules:
+{% endraw %}{%- for model,broker_expected_count in cookiecutter.broker_counts.items() %}{% raw %}
+    - alert: BrokerRunningStateCount for model {% endraw %}{{ model }}{% raw %}
+      annotations:
+        description: "The number of brokers in a RUNNING state in model {{ $labels.juju_model }} is {{ $value }} which has dropped below the expected count of {% endraw %}{{ broker_expected_count }}{% raw %}
+           for more than 10 minutes."
+        summary: "Broker count in model {{ $labels.juju_model }} :: Critical :: Count is {{ $value }}% "
+      expr: count(kafka_server_kafkaserver_brokerstate{juju_model=~"{% endraw %}{{ model }}{% raw %}"} == 3) by (juju_model) < {% endraw %}{{ broker_expected_count }}{% raw %}
+      for: 10m
+      labels:
+        severity: critical
+{% endraw %}
+{% endfor %}
+{%- endif -%}

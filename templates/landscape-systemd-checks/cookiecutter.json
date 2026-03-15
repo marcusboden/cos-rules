@@ -1,0 +1,18 @@
+{
+  "bundle": "default-bundle",
+  "severity": "low",
+  "minutes": 30,
+  "services": {
+    "svcs": [
+      "landscape-api", 
+      "landscape-appserver", 
+      "landscape-async-frontend", 
+      "landscape-job-handler", 
+      "landscape-msgserver", 
+      "landscape-package-search", 
+      "landscape-package-upload", 
+      "landscape-pingserver"
+    ]
+  }
+}
+

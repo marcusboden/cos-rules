@@ -1,0 +1,16 @@
+groups:
+  - name: Landscape Systemd Checks
+    rules:{% for service in cookiecutter.services.svcs %}
+    - alert: Systemd Service {{ service }}.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="{{ service }}.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="{{ service }}.service"} == 1)
+      for: {{ cookiecutter.minutes }}m
+      labels:
+        severity: {{ cookiecutter.severity }}
+        type: nrpe-replacement
+        service: {{ service }}
+      annotations:
+        summary: Landscape Systemd service {{ service }} on {{ '{{' }} $labels.instance {{ '}}' }} is down.
+        description: |
+          The systemd service "{{ service }}.service" on {{ '{{' }} $labels.instance {{ '}}' }} is down.
+          Please check the unit and the logs.
+{% endfor -%}

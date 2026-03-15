@@ -1,0 +1,21 @@
+{% raw %}
+groups:
+- name: CustomMicroovn
+  rules:
+  - alert: MicroovnNorthBoundDown
+    annotations:
+      description: The number of Microovn North Bound Databases in model {{ $labels.juju_model }} is less than 3. One or more of them might be down or in a bad state. Run microovn status for more info.
+      summary: The number of Microovn North Bound Databases is less than 3.
+    expr: count(custom_microovn_cluster_status{cluster="Northbound"}) < 3
+    for: 15m
+    labels:
+      severity: critical
+  - alert: MicroovnSouthBoundDown
+    annotations:
+      description: The number of Microovn South Bound Databases in model {{ $labels.juju_model }} is less than 3. One or more of them might be down or in a bad state. Run microovn status for more info.
+      summary: The number of Microovn South Bound Databases is less than 3.
+    expr: count(custom_microovn_cluster_status{cluster="Southbound"}) < 3
+    for: 15m
+    labels:
+      severity: critical
+{% endraw %}

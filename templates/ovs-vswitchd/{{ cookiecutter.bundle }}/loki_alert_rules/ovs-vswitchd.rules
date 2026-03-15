@@ -1,0 +1,21 @@
+{% raw %}
+groups:
+- name: OVS-vSwitchd
+  rules:
+  - alert: OVSvSwitchdFailures
+    annotations:
+      description: |
+        OVS vSwitchd is experiencing high log drop rates due to excessive logging.
+        In previous events, this coincided with networking issues and needed a restart of the daemon. The restart may cause short outages though, so do not blindly restart ovs-vswitchd.
+
+        Also refer to 00428061.
+        
+        Host: {{ $labels.instance }}
+        
+        LABELS = {{ $labels }}.
+      summary: OVS vSwitchd may be faulty on {{ $labels.instance }}
+    expr: |
+      avg by(instance) (rate({juju_application="grafana-agent-host", filename="/var/log/openvswitch/ovs-vswitchd.log"} |= `dpif_netlink` |= `due to excessive rate` | regexp `Dropped (?P<number>\d+) log messages in last (?P<interval>\d+) seconds \(most recently, \d+ seconds ago\) due to excessive rate` | unwrap number [1m])) / avg by(instance) (rate({juju_application="grafana-agent-host", filename="/var/log/openvswitch/ovs-vswitchd.log"} |= `dpif_netlink` |= `due to excessive rate` | regexp `Dropped (?P<number>\d+) log messages in last (?P<interval>\d+) seconds \(most recently, \d+ seconds ago\) due to excessive rate` | unwrap interval [1m])) > {% endraw %}{{ cookiecutter.ovs_vswitchd_failure_threshold }}{% raw %}
+    labels:
+      severity: "warning"
+{% endraw %}

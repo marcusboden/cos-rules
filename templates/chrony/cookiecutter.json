@@ -1,0 +1,7 @@
+{
+  "bundle": "default-bundle",
+  "offset_warn": "0.025",
+  "offset_crit": "0.05",
+  "reach_warn": "0.75",
+  "reach_crit": "0.5"
+}

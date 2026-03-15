@@ -1,0 +1,4 @@
+{
+  "bundle": "default-bundle",
+  "loki_latency_threshold_sec": "1"
+}

@@ -1,0 +1,9 @@
+{
+  "bundle": "default-bundle",
+  "warning_threshold": "25.0",
+  "critical_threshold": "50.0",
+  "tenants": {
+    "tenant_ids": []
+  },
+  "instance_build_timeout": "1h"
+}

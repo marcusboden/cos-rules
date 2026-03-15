@@ -1,0 +1,15 @@
+{%- if cookiecutter.jvm_usage_percent_threshold|length > 0 -%}
+{% raw %}
+groups:
+- name: Custom JVM Rules
+  rules:
+    - alert: CustomKafkaJvmMemoryNearFull
+      expr: (sum by (juju_unit)(jvm_memory_bytes_used) / sum by (juju_unit)(jvm_memory_bytes_max)) * 100 > {% endraw %}{{ cookiecutter.jvm_usage_percent_threshold }}{% raw %}
+      for: 5m
+      labels:
+          severity: warning
+      annotations:
+          summary: "JVM memory is nearly full ({{ $labels.juju_unit }})"
+          description: "JVM memory usage is more than {% endraw %}{{ cookiecutter.jvm_usage_percent_threshold }}{% raw %}% for 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+{% endraw %}
+{%- endif -%}

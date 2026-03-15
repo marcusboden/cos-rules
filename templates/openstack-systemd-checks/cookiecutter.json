@@ -1,0 +1,176 @@
+{
+  "bundle": "default-bundle",
+  "services": {
+    "aodh-evaluator": [
+      "aodh"
+    ],
+    "aodh-listener": [
+      "aodh"
+    ],
+    "aodh-notifier": [
+      "aodh"
+    ],
+    "apache2": [
+      "aodh",
+      "ceph-radosgw",
+      "cinder",
+      "glance",
+      "heat",
+      "keystone",
+      "manila",
+      "neutron-api",
+      "nova-cloud-controller",
+      "octavia",
+      "openstack-dashboard"
+    ],
+    "ceilometer-agent-notification": [
+      "ceilometer"
+    ],
+    "ceilometer-agent-compute": [
+      "ceph-osd"
+    ],
+    "libvirtd": [
+      "ceph-osd"
+    ],
+    "lldpd": [
+      "ceph-osd"
+    ],
+    "memcached": [
+      "ceph-osd",
+      "cinder",
+      "glance",
+      "heat",
+      "keystone",
+      "neutron-api",
+      "nova-cloud-controller",
+      "octavia",
+      "openstack-dashboard"
+    ],
+    "neutron-ovn-metadata-agent": [
+      "ceph-osd"
+    ],
+    "nova-api-metadata": [
+      "ceph-osd"
+    ],
+    "nova-compute": [
+      "ceph-osd"
+    ],
+    "ovn-controller": [
+      "ceph-osd",
+      "octavia"
+    ],
+    "ovs-vswitchd": [
+      "ceph-osd",
+      "octavia"
+    ],
+    "ovsdb-server": [
+      "ceph-osd",
+      "octavia"
+    ],
+    "ceph-radosgw.*": [
+      "ceph-radosgw"
+    ],
+    "haproxy": [
+      "ceph-radosgw",
+      "cinder",
+      "glance",
+      "heat",
+      "keystone",
+      "manila",
+      "neutron-api",
+      "nova-cloud-controller",
+      "octavia",
+      "openstack-dashboard"
+    ],
+    "cinder-scheduler": [
+      "cinder"
+    ],
+    "cinder-volume": [
+      "cinder"
+    ],
+    "designate-agent": [
+      "designate"
+    ],
+    "designate-api": [
+      "designate"
+    ],
+    "designate-central": [
+      "designate"
+    ],
+    "designate-mdns": [
+      "designate"
+    ],
+    "designate-producer": [
+      "designate"
+    ],
+    "designate-sink": [
+      "designate"
+    ],
+    "designate-worker": [
+      "designate"
+    ],
+    "snap.etcd.etcd": [
+      "etcd"
+    ],
+    "glance-api": [
+      "glance"
+    ],
+    "heat-api-cfn": [
+      "heat"
+    ],
+    "heat-api": [
+      "heat"
+    ],
+    "heat-engine": [
+      "heat"
+    ],
+    "manila-data": [
+      "manila"
+    ],
+    "manila-scheduler": [
+      "manila"
+    ],
+    "neutron-server": [
+      "neutron-api"
+    ],
+    "nova-conductor": [
+      "nova-cloud-controller"
+    ],
+    "nova-scheduler": [
+      "nova-cloud-controller"
+    ],
+    "nova-spiceproxy": [
+      "nova-cloud-controller"
+    ],
+    "octavia-health-manager": [
+      "octavia"
+    ],
+    "octavia-housekeeping": [
+      "octavia"
+    ],
+    "octavia-worker": [
+      "octavia"
+    ],
+    "ovn-northd": [
+      "ovn-central"
+    ],
+    "ovn-ovsdb-server-nb": [
+      "ovn-central"
+    ],
+    "ovn-ovsdb-server-sb": [
+      "ovn-central"
+    ],
+    "vault": [
+      "vault"
+    ]
+  },
+  "blacklist": {
+    "services": [
+      ""
+    ],
+    "components": [
+      ""
+    ]
+  }
+}
+

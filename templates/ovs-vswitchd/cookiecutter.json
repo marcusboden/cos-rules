@@ -1,0 +1,4 @@
+{
+  "bundle": "default-bundle",
+  "ovs_vswitchd_failure_threshold": "1000"
+}

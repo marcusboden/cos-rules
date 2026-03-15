@@ -1,0 +1,19 @@
+{% raw %}
+groups:
+- name: OpenstackVMBuilds
+  rules:
+  - alert: BuildFailRatePerHost
+    expr: 'count by(error,instance,exception,juju_unit,juju_model,juju_application) (rate({filename="/var/log/nova/nova-compute.log"} | pattern `<date> <time> <_> <level> <component> [<req> <_> <_> - <_> <_>] [instance: <vm>] <msg>: <exception>: <error>` | level = `ERROR` | vm != `` | component = `nova.compute.manager` |= `Instance failed to spawn` [10m])) > {% endraw %}{{ cookiecutter.warning_threshold }}{% raw %}'
+    annotations:
+      summary: |
+        There were {{ $value }} build failures on {{ $labels.instance }} in the last 10 minutes.
+
+        Exception: {{ $labels.exception }}
+        Full error: {{ $labels.error }}
+      description: |
+        Build failures can happen because of user error, but it may also indicate underlying issues.
+        Have a look at the kind of error you see here, i.e. the exception and error.
+    labels:
+      severity: "{{ if gt $value {% endraw %}{{ cookiecutter.critical_threshold }}{% raw %} }}critical{{ else }}warning{{ end }}"
+      host: "{{ $labels.instance }}"
+{% endraw -%}
