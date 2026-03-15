@@ -1,0 +1,58 @@
+name: Build, Lint, and Publish
+run-name: Generate Rules And Public
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Deps
+        run: |
+          sudo apt-get update -qy
+          sudo apt-get install -y git python3 python3-pip
+          python3 -m pip install -r requirements.txt
+      - name: Generate Rules
+        run: python cutter.py
+      - name: upload generated rules
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-rules
+          path: generated/
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: [generate]
+    steps:
+      - name: Install cos-tool
+        run: | 
+          wget https://github.com/canonical/cos-tool/releases/download/rel-20260310/cos-tool-amd64
+          chmod u+x ./cos-tool-amd64
+      - name: Download Generated Rules
+        uses: actions/download-artifact@v5
+        with:
+          name: generated-rules
+          path: generated/
+      - name: Lint
+        run: ./cos-tool-amd64 v $(find generated/ -name "*.rules" -type f)
+
+  publish:
+    permissions:
+      contents: write
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download Generated Rules
+        uses: actions/download-artifact@v5
+        with:
+          name: generated-rules
+          path: generated/
+      - name: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: scripts/publish.sh generated

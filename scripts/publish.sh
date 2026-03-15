@@ -1,9 +1,19 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -exuo pipefail
 
-REPO=$1
-RENDERED_PATH=$2
+RENDERED_PATH=${1:?Usage: scripts/publish.sh <rendered-path>}
+
+: "${GITHUB_TOKEN:?GITHUB_TOKEN must be set}"
+: "${GITHUB_REPOSITORY:?GITHUB_REPOSITORY must be set}"
+: "${GITHUB_ACTOR:?GITHUB_ACTOR must be set}"
+
+if [[ ! -d "${RENDERED_PATH}" ]]; then
+    echo "Rendered path '${RENDERED_PATH}' does not exist or is not a directory."
+    exit 1
+fi
+
+REPO="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
 for BRANCH in $(ls $RENDERED_PATH); do
     echo "Publishing $BRANCH..."
@@ -15,16 +25,16 @@ for BRANCH in $(ls $RENDERED_PATH); do
         git remote add origin ${REPO}
         git checkout -b ${BRANCH}
     else
-        git remote add origin ${REPO} -f -t ${BRANCH}
+        git remote add origin ${REPO} -t ${BRANCH}
         git checkout -B ${BRANCH}
     fi
 
     # commit the latest version of generated files
     git add .
-    git commit -m "Sync cos-configuration" --author "Managed Solutions Automation <managed-solutions@canonical.com>"
+    git config user.name "${GITHUB_ACTOR}"
+    git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+    git commit -m "Sync cos-configuration" --author "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
     git push origin ${BRANCH}:${BRANCH} --force
 
     popd
 done
-
-set +x
