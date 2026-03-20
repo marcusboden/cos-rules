@@ -1,0 +1,106 @@
+groups:
+  - name: Landscape Systemd Checks
+    rules:
+    - alert: Systemd Service landscape-api.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-api.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-api.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-api
+      annotations:
+        summary: Landscape Systemd service landscape-api on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-api.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-appserver.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-appserver.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-appserver.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-appserver
+      annotations:
+        summary: Landscape Systemd service landscape-appserver on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-appserver.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-async-frontend.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-async-frontend.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-async-frontend.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-async-frontend
+      annotations:
+        summary: Landscape Systemd service landscape-async-frontend on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-async-frontend.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-job-handler.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-job-handler.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-job-handler.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-job-handler
+      annotations:
+        summary: Landscape Systemd service landscape-job-handler on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-job-handler.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-msgserver.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-msgserver.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-msgserver.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-msgserver
+      annotations:
+        summary: Landscape Systemd service landscape-msgserver on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-msgserver.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-package-search.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-package-search.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-package-search.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-package-search
+      annotations:
+        summary: Landscape Systemd service landscape-package-search on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-package-search.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-package-upload.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-package-upload.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-package-upload.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-package-upload
+      annotations:
+        summary: Landscape Systemd service landscape-package-upload on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-package-upload.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service landscape-pingserver.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="landscape-pingserver.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="landscape-pingserver.service"} == 1)
+      for: 30m
+      labels:
+        severity: low
+        type: nrpe-replacement
+        service: landscape-pingserver
+      annotations:
+        summary: Landscape Systemd service landscape-pingserver on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "landscape-pingserver.service" on {{ $labels.instance }} is down.
+          Please check the unit and the logs.

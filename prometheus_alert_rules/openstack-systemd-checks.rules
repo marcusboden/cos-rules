@@ -1,0 +1,618 @@
+groups:
+  - name: OpenStack Systemd Checks
+    rules:
+    - alert: Systemd Service aodh-evaluator.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="aodh-evaluator.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="aodh-evaluator.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: aodh-evaluator
+      annotations:
+        summary: OpenStack Systemd service aodh-evaluator on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "aodh-evaluator.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: aodh.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service aodh-listener.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="aodh-listener.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="aodh-listener.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: aodh-listener
+      annotations:
+        summary: OpenStack Systemd service aodh-listener on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "aodh-listener.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: aodh.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service aodh-notifier.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="aodh-notifier.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="aodh-notifier.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: aodh-notifier
+      annotations:
+        summary: OpenStack Systemd service aodh-notifier on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "aodh-notifier.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: aodh.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service apache2.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="apache2.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="apache2.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: apache2
+      annotations:
+        summary: OpenStack Systemd service apache2 on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "apache2.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: aodh, ceph-radosgw, cinder, glance, heat, keystone, manila, neutron-api, nova-cloud-controller, octavia, openstack-dashboard.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ceilometer-agent-notification.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ceilometer-agent-notification.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ceilometer-agent-notification.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ceilometer-agent-notification
+      annotations:
+        summary: OpenStack Systemd service ceilometer-agent-notification on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ceilometer-agent-notification.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceilometer.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ceilometer-agent-compute.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ceilometer-agent-compute.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ceilometer-agent-compute.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ceilometer-agent-compute
+      annotations:
+        summary: OpenStack Systemd service ceilometer-agent-compute on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ceilometer-agent-compute.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service libvirtd.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="libvirtd.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="libvirtd.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: libvirtd
+      annotations:
+        summary: OpenStack Systemd service libvirtd on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "libvirtd.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service lldpd.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="lldpd.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="lldpd.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: lldpd
+      annotations:
+        summary: OpenStack Systemd service lldpd on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "lldpd.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service memcached.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="memcached.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="memcached.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: memcached
+      annotations:
+        summary: OpenStack Systemd service memcached on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "memcached.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd, cinder, glance, heat, keystone, neutron-api, nova-cloud-controller, octavia, openstack-dashboard.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service neutron-ovn-metadata-agent.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="neutron-ovn-metadata-agent.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="neutron-ovn-metadata-agent.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: neutron-ovn-metadata-agent
+      annotations:
+        summary: OpenStack Systemd service neutron-ovn-metadata-agent on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "neutron-ovn-metadata-agent.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service nova-api-metadata.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="nova-api-metadata.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="nova-api-metadata.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: nova-api-metadata
+      annotations:
+        summary: OpenStack Systemd service nova-api-metadata on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "nova-api-metadata.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service nova-compute.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="nova-compute.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="nova-compute.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: nova-compute
+      annotations:
+        summary: OpenStack Systemd service nova-compute on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "nova-compute.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovn-controller.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovn-controller.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovn-controller.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovn-controller
+      annotations:
+        summary: OpenStack Systemd service ovn-controller on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovn-controller.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd, octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovs-vswitchd.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovs-vswitchd.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovs-vswitchd.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovs-vswitchd
+      annotations:
+        summary: OpenStack Systemd service ovs-vswitchd on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovs-vswitchd.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd, octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovsdb-server.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovsdb-server.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovsdb-server.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovsdb-server
+      annotations:
+        summary: OpenStack Systemd service ovsdb-server on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovsdb-server.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-osd, octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ceph-radosgw.*.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name=~"ceph-radosgw.*.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name=~"ceph-radosgw.*.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ceph-radosgw.*
+      annotations:
+        summary: OpenStack Systemd service ceph-radosgw.* on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ceph-radosgw.*.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-radosgw.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service haproxy.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="haproxy.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="haproxy.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: haproxy
+      annotations:
+        summary: OpenStack Systemd service haproxy on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "haproxy.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ceph-radosgw, cinder, glance, heat, keystone, manila, neutron-api, nova-cloud-controller, octavia, openstack-dashboard.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service cinder-scheduler.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="cinder-scheduler.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="cinder-scheduler.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: cinder-scheduler
+      annotations:
+        summary: OpenStack Systemd service cinder-scheduler on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "cinder-scheduler.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: cinder.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service cinder-volume.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="cinder-volume.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="cinder-volume.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: cinder-volume
+      annotations:
+        summary: OpenStack Systemd service cinder-volume on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "cinder-volume.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: cinder.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-agent.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-agent.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-agent.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-agent
+      annotations:
+        summary: OpenStack Systemd service designate-agent on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-agent.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-api.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-api.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-api.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-api
+      annotations:
+        summary: OpenStack Systemd service designate-api on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-api.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-central.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-central.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-central.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-central
+      annotations:
+        summary: OpenStack Systemd service designate-central on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-central.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-mdns.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-mdns.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-mdns.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-mdns
+      annotations:
+        summary: OpenStack Systemd service designate-mdns on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-mdns.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-producer.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-producer.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-producer.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-producer
+      annotations:
+        summary: OpenStack Systemd service designate-producer on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-producer.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-sink.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-sink.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-sink.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-sink
+      annotations:
+        summary: OpenStack Systemd service designate-sink on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-sink.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service designate-worker.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="designate-worker.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="designate-worker.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: designate-worker
+      annotations:
+        summary: OpenStack Systemd service designate-worker on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "designate-worker.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: designate.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service snap.etcd.etcd.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="snap.etcd.etcd.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="snap.etcd.etcd.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: snap.etcd.etcd
+      annotations:
+        summary: OpenStack Systemd service snap.etcd.etcd on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "snap.etcd.etcd.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: etcd.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service glance-api.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="glance-api.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="glance-api.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: glance-api
+      annotations:
+        summary: OpenStack Systemd service glance-api on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "glance-api.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: glance.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service heat-api-cfn.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="heat-api-cfn.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="heat-api-cfn.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: heat-api-cfn
+      annotations:
+        summary: OpenStack Systemd service heat-api-cfn on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "heat-api-cfn.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: heat.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service heat-api.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="heat-api.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="heat-api.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: heat-api
+      annotations:
+        summary: OpenStack Systemd service heat-api on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "heat-api.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: heat.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service heat-engine.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="heat-engine.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="heat-engine.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: heat-engine
+      annotations:
+        summary: OpenStack Systemd service heat-engine on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "heat-engine.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: heat.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service manila-data.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="manila-data.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="manila-data.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: manila-data
+      annotations:
+        summary: OpenStack Systemd service manila-data on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "manila-data.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: manila.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service manila-scheduler.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="manila-scheduler.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="manila-scheduler.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: manila-scheduler
+      annotations:
+        summary: OpenStack Systemd service manila-scheduler on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "manila-scheduler.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: manila.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service neutron-server.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="neutron-server.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="neutron-server.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: neutron-server
+      annotations:
+        summary: OpenStack Systemd service neutron-server on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "neutron-server.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: neutron-api.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service nova-conductor.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="nova-conductor.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="nova-conductor.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: nova-conductor
+      annotations:
+        summary: OpenStack Systemd service nova-conductor on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "nova-conductor.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: nova-cloud-controller.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service nova-scheduler.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="nova-scheduler.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="nova-scheduler.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: nova-scheduler
+      annotations:
+        summary: OpenStack Systemd service nova-scheduler on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "nova-scheduler.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: nova-cloud-controller.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service nova-spiceproxy.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="nova-spiceproxy.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="nova-spiceproxy.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: nova-spiceproxy
+      annotations:
+        summary: OpenStack Systemd service nova-spiceproxy on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "nova-spiceproxy.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: nova-cloud-controller.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service octavia-health-manager.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="octavia-health-manager.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="octavia-health-manager.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: octavia-health-manager
+      annotations:
+        summary: OpenStack Systemd service octavia-health-manager on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "octavia-health-manager.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service octavia-housekeeping.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="octavia-housekeeping.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="octavia-housekeeping.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: octavia-housekeeping
+      annotations:
+        summary: OpenStack Systemd service octavia-housekeeping on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "octavia-housekeeping.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service octavia-worker.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="octavia-worker.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="octavia-worker.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: octavia-worker
+      annotations:
+        summary: OpenStack Systemd service octavia-worker on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "octavia-worker.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: octavia.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovn-northd.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovn-northd.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovn-northd.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovn-northd
+      annotations:
+        summary: OpenStack Systemd service ovn-northd on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovn-northd.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ovn-central.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovn-ovsdb-server-nb.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovn-ovsdb-server-nb.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovn-ovsdb-server-nb.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovn-ovsdb-server-nb
+      annotations:
+        summary: OpenStack Systemd service ovn-ovsdb-server-nb on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovn-ovsdb-server-nb.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ovn-central.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service ovn-ovsdb-server-sb.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="ovn-ovsdb-server-sb.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="ovn-ovsdb-server-sb.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: ovn-ovsdb-server-sb
+      annotations:
+        summary: OpenStack Systemd service ovn-ovsdb-server-sb on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "ovn-ovsdb-server-sb.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: ovn-central.
+          Please check the unit and the logs.
+
+    - alert: Systemd Service vault.service Down
+      expr:  sum by (instance,juju_unit,juju_model,juju_application)  (node_systemd_unit_state{name="vault.service", state="active"}) != count by (instance,juju_unit,juju_model,juju_application) (node_systemd_unit_state{name="vault.service"} == 1)
+      for: 5m
+      labels:
+        severity: critical
+        type: nrpe-replacement
+        service: vault
+      annotations:
+        summary: OpenStack Systemd service vault on {{ $labels.instance }} is down.
+        description: |
+          The systemd service "vault.service" on {{ $labels.instance }} is down.
+          This systemd unit could be part of any of the the following openstack components: vault.
+          Please check the unit and the logs.
