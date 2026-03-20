@@ -38,7 +38,7 @@ jobs:
           name: generated-rules
           path: generated/
       - name: Lint
-        run: ./cos-tool-amd64 v $(find generated/prometheus_alert_rules -name "*.rules" -type f)
+        run: ./cos-tool-amd64 v $(find generated -name "*.rules" -type f | grep -v loki)
 
   publish:
     permissions:
