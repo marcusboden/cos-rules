@@ -1,0 +1,16 @@
+
+groups:
+- name: neutron-compute-alerts
+  rules:
+  - alert: NovaUSBTabletRequest
+    expr: rate({filename="/var/log/nova/nova-compute.log"} |~ "USB tablet requested for guests but the SPICE agent is enabled"[5m]) > 0
+    for: 0m
+    labels:
+      severity: warning
+      service: nova
+      component: nova-compute
+    annotations:
+      summary: "USB tablet request warning"
+      description: >
+        Known nova bug that causes flooding the
+        nova-compute logs with the USB tablet requests.
