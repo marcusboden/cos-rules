@@ -16,3 +16,6 @@ bundles:
   - name: spark
     components:
       - name: spark
+  - name: hotsos-test
+    components:
+      - name: hotsos
